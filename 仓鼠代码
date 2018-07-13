@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy as sp
+%matplotlib inline
+
+def f(T,H,I):
+    a = 31.57765 + 0.09136*T + 0.12261*H + 0.2272*I
+    #print('摄入能=',a,'J')
+    return a
+    
+def g(T,H,I):
+    b = 0.59442 + 0.003646*T + 0.006254*H + 0.006516*I
+    #print('消化率=',(b)*100,'%')
+    return b
+    
+def h(T,H,I):
+    c = 389.2399 + 1.01479*T + 0.68121*H - 0.65546*I
+    #print('BMR=',c,'J')
+    return c
+    
+T = float(input('请输入环境温度T： '))
+H = float(input('请输入环境湿度H(整数形式如：30)： '))
+I = float(input('请输入光照强度I(0,1,2分别代表无光，弱光，较强光)： '))
+
+a = f(T,H,I)
+b = g(T,H,I)
+c = h(T,H,I)
+s = 0.3*a+0.4*b+0.3*c
+print('得分 =',sp.tanh(s/100)*100)
+
